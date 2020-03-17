@@ -21,5 +21,11 @@ create table master_arbit_info (
   KEY idx_ct (create_time)
 ) ENGINE=InnoDB;
 
-CREATE EVENT job_data_clear ON SCHEDULE EVERY 1 HOUR ON COMPLETION PRESERVE ENABLE DO
-	DELETE FROM master_arbit_info WHERE	create_time < DATE_SUB(now(), INTERVAL 1 DAY);
+DELIMITER |
+create event job_data_clear
+on schedule every 1 hour starts now()
+on completion preserve
+enable
+do
+delete master_arbit_info where create_time < date_sub(now(), INTERVAL 1 DAY)|
+DELIMITER ;
