@@ -1,4 +1,4 @@
-项目名称：mkf(mysql keepalived failover)
+项目名称：mkf (mysql keepalived failover)
 
 部署步骤：
 
