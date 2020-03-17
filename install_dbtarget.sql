@@ -1,3 +1,7 @@
+create database dbadmin;
+
+use dbadmin;
+
 create table heartbeat (
   id int(11) NOT NULL DEFAULT '0',
   create_time datetime DEFAULT NULL,
