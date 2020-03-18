@@ -8,6 +8,7 @@ create table master_info (
   port int(11) NOT NULL,
   user_name varchar(100) NOT NULL,
   status int(11) DEFAULT '0' COMMENT '0: active, 1: inactive',
+  update_time timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (db_name)
 ) ENGINE=InnoDB;
 
