@@ -41,11 +41,11 @@ def check_targetdb_pool():
     # add pool to g_pool_dic which is not in
     connect = managerdb_pool.connection()
     cursor = connect.cursor()
-    sql = "select db_name,ip,port,user_name from master_info where status=0"
+    sql = "select db_name,ip,port,user_name,case when update_time > DATE_SUB(now(),INTERVAL 60 second) then 'changed' else 'unchanged' end ischanged from master_info where status=0"
     cursor.execute(sql)
     rows = cursor.fetchall()
     for row in rows:
-        if not g_pool_dic.get(row[0]):
+        if (not g_pool_dic.get(row[0])) or row[4] == 'changed':
             try:
                 g_pool_dic[row[0]] = PooledDB(pymysql,
                                              maxconnections=3,
